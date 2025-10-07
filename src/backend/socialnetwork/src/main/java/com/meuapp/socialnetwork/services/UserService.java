@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.meuapp.socialnetwork.domain.User;
 import com.meuapp.socialnetwork.repository.UserRepository;
+import com.meuapp.socialnetwork.services.exception.ObjectNotFoundException;
 
 @Service    
 public class UserService {
@@ -17,4 +18,8 @@ public class UserService {
     public List<User> findAll() {
         return repo.findAll();
     }
+
+    public User findById(String id) {
+        return repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }    
 }
