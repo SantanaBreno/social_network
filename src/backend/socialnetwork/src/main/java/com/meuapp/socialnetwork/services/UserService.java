@@ -20,6 +20,7 @@ public class UserService {
     }
 
     public User findById(String id) {
-        return repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+        return repo.findById(id)
+            .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }    
 }
