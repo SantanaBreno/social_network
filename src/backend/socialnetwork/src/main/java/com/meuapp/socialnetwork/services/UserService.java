@@ -3,6 +3,7 @@ package com.meuapp.socialnetwork.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.meuapp.socialnetwork.domain.User;
@@ -34,6 +35,17 @@ public class UserService {
         repo.deleteById(id);;
     }
 
+    public User update(User obj) {
+        User newObj = repo.findById(obj.getId())
+            .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+        UpdateData(newObj, obj);
+        return repo.save(newObj);
+    }
+
+    private void UpdateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
     public User fromDTO(UserDTO objDto) {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
