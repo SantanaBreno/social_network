@@ -52,7 +52,7 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    public String geTitle() {
+    public String getTitle() {
         return title;
     }
 
